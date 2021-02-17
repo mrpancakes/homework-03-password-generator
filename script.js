@@ -11,7 +11,7 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", passwordPrompt);
 
 
 
@@ -23,12 +23,29 @@ const numbersCharCodes = arrayFromLowToHigh(48, 57);
 const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64).concat(arrayFromLowToHigh(91,96)).concat(arrayFromLowToHigh(123,126)));
 const passwordBeginning = [];
 
+var passwordLength;
+var wantLowercase;
+var wantUppercase;
+var wantNumbers;
+var wantSymbols;
+
 // Prompts for user's password critera
-var passwordLength = window.prompt("How many characters? (min 8, max 128)");
-var wantLowercase = window.confirm("Do you want lowercase letters?");
-var wantUppercase = window.confirm("Do you want uppercase letters?");
-var wantNumbers = window.confirm("Do you want numbers?");
-var wantSymbols = window.confirm("Do you want symbols?");
+function passwordPrompt (){
+  passwordLength = window.prompt("How many characters? (min 8, max 128)");
+  if (passwordLength < 8 || passwordLength > 128){
+    alert("Your password must be between 8-128 characters")
+  } else {
+    wantLowercase = window.confirm("Do you want lowercase letters?");
+    wantUppercase = window.confirm("Do you want uppercase letters?");
+    wantNumbers = window.confirm("Do you want numbers?");
+    wantSymbols = window.confirm("Do you want symbols?");
+  }
+}
+
+passwordPrompt();
+
+
+
 
 
 console.log(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols); // testing that the prompts work
