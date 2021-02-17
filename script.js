@@ -21,6 +21,7 @@ const lowercaseCharCodes = arrayFromLowToHigh(97, 122);
 const uppercaseCharCodes = arrayFromLowToHigh(65, 90);
 const numbersCharCodes = arrayFromLowToHigh(48, 57);
 const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64).concat(arrayFromLowToHigh(91,96)).concat(arrayFromLowToHigh(123,126)));
+const passwordBeginning = [];
 
 // Prompts for user's password critera
 var passwordLength = window.prompt("How many characters? (min 8, max 128)");
@@ -37,12 +38,13 @@ const thePassword = passwordGenerator(passwordLength, wantLowercase, wantUpperca
 
 // Generates the password and stores it
 function passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols){
-  let charCodes = lowercaseCharCodes
+  let charCodes = []
+  if (wantLowercase) charCodes = charCodes.concat(lowercaseCharCodes)
   if (wantUppercase) charCodes = charCodes.concat(uppercaseCharCodes)
   if (wantNumbers) charCodes = charCodes.concat(numbersCharCodes)
   if (wantSymbols) charCodes = charCodes.concat(symbolsCharCodes)
-  const passwordCharacters = [];
 
+  const passwordCharacters = [];
   for(let i = 0; i < passwordLength; i++) {
     const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
     passwordCharacters.push(String.fromCharCode(characterCode))
