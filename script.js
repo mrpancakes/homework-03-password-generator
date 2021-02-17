@@ -15,78 +15,50 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
-// ****** My Attempt ******
+// Using charcodes to generate a to set the range of available characters. Uses the function created further down for arrayFromLowToHigh:
 
+const lowercaseCharCodes = arrayFromLowToHigh(97, 122);
+const uppercaseCharCodes = arrayFromLowToHigh(65, 90);
+const numbersCharCodes = arrayFromLowToHigh(48, 57);
+const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64).concat(arrayFromLowToHigh(91,96)).concat(arrayFromLowToHigh(123,126)));
 
 // Prompts for user's password critera
 var passwordLength = window.prompt("How many characters? (min 8, max 128)");
 var wantLowercase = window.confirm("Do you want lowercase letters?");
 var wantUppercase = window.confirm("Do you want uppercase letters?");
 var wantNumbers = window.confirm("Do you want numbers?");
-var wantSpecial = window.confirm("Do you want special characters?");
-
-console.log(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSpecial); // testing that the prompts work
+var wantSymbols = window.confirm("Do you want symbols?");
 
 
+console.log(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols); // testing that the prompts work
 
+// The final password string
+const thePassword = passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols);
 
-// Based on the length and true/false values of the character types they want, I need to spit out a random password.
+// Generates the password and stores it
+function passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols){
+  let charCodes = lowercaseCharCodes
+  if (wantUppercase) charCodes = charCodes.concat(uppercaseCharCodes)
+  if (wantNumbers) charCodes = charCodes.concat(numbersCharCodes)
+  if (wantSymbols) charCodes = charCodes.concat(symbolsCharCodes)
+  const passwordCharacters = [];
 
-/* One array for "Characters" and sub-arrays inside it maybe, with all the possible character types? 
-  and then if the user choose 10 characters and True for all, then a random number function that iterates through the qualifying sub-arrays?
-/*
-
-
-
-// Generator Functions
-
-/* Multiply a random decimal (btwn 0-1) times 26 (numbers of letters in alphabet). 
-    Then adds 97 to input the result between 97 - 123 (range of lowercase characters in the Browser charset) */
-function randomLower () {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-function randomUpper () {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 65); 
-}
-
-function randomNumber () {
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48); 
-}
-
-function randomSymbol () {
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48); 
-}
-console.log(randomLower());
-console.log(randomUpper());
-console.log(randomNumber());
-console.log(randomSymbol());
-
-
-// loops through all of the 'random' generator funnctions X amount of times, based on the password length chosen by user
-function generateTest (testLength) {
-  for (var i = 0; i <= testLength; i++) {
-    
+  for(let i = 0; i < passwordLength; i++) {
+    const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
+    passwordCharacters.push(String.fromCharCode(characterCode))
   }
+  return passwordCharacters.join('');
+};
+
+
+function arrayFromLowToHigh(low, high) {
+  const array = [];
+  for (let i = low; i <= high; i++) {
+    array.push(i);
+  }
+  return array;
 }
 
 
 
-
-
-
-
-// Can do also randomly generate characters with a set of arrays instead of using charset. Lowercase example:
-
-var lowercaseArr = ["a", "b", "c", "d", "e", "f", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ];
-var lowerChoice;
-
-function newLower(){
-    lowerChoice = lowercaseArr[Math.floor(Math.random() * lowercaseArr.length)];
-    return lowerChoice;
-}
-
-newLower();
-
-console.log(lowerChoice);
-
+console.log(thePassword);
