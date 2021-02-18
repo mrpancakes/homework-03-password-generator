@@ -11,26 +11,21 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", passwordPrompt);
+generateBtn.addEventListener("click", password);
 
 
 
-// Using charcodes to generate a to set the range of available characters. Uses the function created further down for arrayFromLowToHigh:
+// Start of my code
 
-const lowercaseCharCodes = arrayFromLowToHigh(97, 122);
-const uppercaseCharCodes = arrayFromLowToHigh(65, 90);
-const numbersCharCodes = arrayFromLowToHigh(48, 57);
-const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64).concat(arrayFromLowToHigh(91,96)).concat(arrayFromLowToHigh(123,126)));
-const passwordBeginning = [];
-
+// Declaring variables for user's password critera
 var passwordLength;
 var wantLowercase;
 var wantUppercase;
 var wantNumbers;
 var wantSymbols;
 
-// Prompts for user's password critera
-function passwordPrompt (){
+// Function with prompt/windows asking for user's password critera, and writing the values to the previously declared variables based on the user's choices.
+function passwordPrompt(){
   passwordLength = window.prompt("How many characters? (min 8, max 128)");
   if (passwordLength < 8 || passwordLength > 128){
     alert("Your password must be between 8-128 characters")
@@ -42,16 +37,28 @@ function passwordPrompt (){
   }
 }
 
-passwordPrompt();
+passwordPrompt(); // calls the function, likely needs to place this somewhere further up in the pre-written code for it to appear on the web page too.
+
+console.log(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols); // testing that the answer's the user chose are correct
 
 
+// Function using a for loop that creates arrays of charcodes when called
+function arrayFromLowToHigh(low, high) {
+  const array = [];
+  for (let i = low; i <= high; i++) {
+    array.push(i);
+  }
+  return array;
+}
 
 
+// Uses the function arrayFromLowToHigh() created above to generate and set the range of available characters in an array
+const lowercaseCharCodes = arrayFromLowToHigh(97, 122);
+const uppercaseCharCodes = arrayFromLowToHigh(65, 90);
+const numbersCharCodes = arrayFromLowToHigh(48, 57);
+const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58,64).concat(arrayFromLowToHigh(91,96)).concat(arrayFromLowToHigh(123,126)));
+const passwordBeginning = [];
 
-console.log(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols); // testing that the prompts work
-
-// The final password string
-const thePassword = passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols);
 
 // Generates the password and stores it
 function passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols){
@@ -70,14 +77,7 @@ function passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNum
 };
 
 
-function arrayFromLowToHigh(low, high) {
-  const array = [];
-  for (let i = low; i <= high; i++) {
-    array.push(i);
-  }
-  return array;
-}
+// The final password string
+const finalPassword = passwordGenerator(passwordLength, wantLowercase, wantUppercase, wantNumbers, wantSymbols);
 
-
-
-console.log(thePassword);
+console.log(finalPassword);
