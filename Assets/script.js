@@ -45,7 +45,6 @@ const lowercaseCharCodes = arrayFromLowToHigh(97, 122);
 const uppercaseCharCodes = arrayFromLowToHigh(65, 90);
 const numbersCharCodes = arrayFromLowToHigh(48, 57);
 const symbolsCharCodes = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58, 64).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126)));
-const passwordBeginning = [];
 
 
 // Generates the password and stores it
