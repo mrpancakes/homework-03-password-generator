@@ -20,5 +20,5 @@ The purpose of this application is to generate a random password for the user, a
 
 You can view the live application [here](https://mrpancakes.github.io/homework-03-password-generator/), along with the GitHub repo [here](https://github.com/mrpancakes/homework-03-password-generator).
 
-![Portfolio Preview](./assets/application-screenshot.png)
+![Portfolio Preview](/assets/application-screenshot.png)
 
