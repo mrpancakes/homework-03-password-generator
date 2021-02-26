@@ -5,7 +5,7 @@
 The purpose of this application is to generate a random password for the user, accounting for the length and character styles set by the user.
 
 ### Application Functionality 
-* Uses a passwordPrompt function that is called when the "Generate Password" button is clicked. Doing so will prompt the user to input how many characters the want and if they want lowercase letters, uppercase letters, numbers, and symbols.
+* Uses a passwordPrompt function that is called when the "Generate Password" button is clicked. Doing so will prompt the user to input how many characters they want and if they want lowercase letters, uppercase letters, numbers, and/or symbols.
 * The resulting password is then displayed inside the box on the screen.
 
 ### Development Notes
